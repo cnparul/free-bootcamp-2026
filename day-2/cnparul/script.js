@@ -1,7 +1,8 @@
 const input = document.getElementById("text");
 const wordCount = document.getElementById("count");
-const output = document.querySelector(".summary-output");
+const output = document.getElementById("summary");
 const noData = document.querySelector(".no-data");
+const btn = document.getElementById("btn");
 
 
 const API_URL = "https://gen.pollinations.ai/v1/chat/completions";
@@ -52,8 +53,10 @@ async function getSummary() {
 }
 
   output.innerHTML = "<p>Generating summary...⏳</p>";
+  
   noData.style.display = "none";
-
+input.disabled = true;
+  btn.disabled = true;
   const body = {
     model: "openai",
     messages: [
@@ -101,7 +104,19 @@ return;
     
   } catch (err) {
     console.error(err);
-    output.innerHTML = "<p>Error generating summary.</p>";
+    output.innerHTML = `<p>Error generating summary: ${lastError}</p>`;
   }
     }
   }
+  function copySummary() {
+  const summary = output.textContent.trim();
+  
+  if (!summary) {
+    alert("No summary to copy!");
+    return;
+  }
+
+  navigator.clipboard.writeText(summary)
+    .then(() => alert("Summary copied! ✅"))
+    .catch(() => alert("Failed to copy."));
+}

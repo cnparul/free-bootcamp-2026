@@ -95,5 +95,15 @@ color:purple;
   color: gray;
   font-weight: smaller;
 }
+.copy-btn{
+  background: rgb(122, 122, 224);
+  color:white;
+  width: 20%;
+  height: 30px;
+  margin: 20px;
+  border-radius: 10px;
+  border-style: none;
+  
+}
 
 
